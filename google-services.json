@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "577585402614",
+    "project_id": "zitounaslijst",
+    "storage_bucket": "zitounaslijst.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:577585402614:android:35df11887b33371a0712d7",
+        "android_client_info": {
+          "package_name": "com.zitounas.productlist"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBMSRqgHgQBEzZ3ffWBfLLNR-U3Uznucxo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,29 @@
+workflows:
+  android-build:
+    name: Android Build (Auto-create android folder)
+    max_build_duration: 60
+    environment:
+      flutter: stable
+    scripts:
+      - name: Create Android folder (v2 embedding)
+        script: flutter create . --platforms=android --project-name=zitounas_voorraadlijst
+      - name: Set applicationId & package
+        script: |
+          sed -i 's/applicationId "com.example.zitounas_voorraadlijst"/applicationId "com.zitounas.productlist"/' android/app/build.gradle || true
+          sed -i 's/package="com.example.zitounas_voorraadlijst"/package="com.zitounas.productlist"/' android/app/src/main/AndroidManifest.xml || true
+      - name: Add google-services plugin
+        script: |
+          if ! grep -q "com.google.gms:google-services" android/build.gradle; then
+            sed -i '/dependencies {/a\        classpath "com.google.gms:google-services:4.3.15"' android/build.gradle
+          fi
+          if ! grep -q "com.google.gms.google-services" android/app/build.gradle; then
+            echo "apply plugin: 'com.google.gms.google-services'" >> android/app/build.gradle
+          fi
+      - name: Place google-services.json
+        script: cp -f google-services.json android/app/google-services.json
+      - name: Flutter pub get
+        script: flutter pub get
+      - name: Build release APK
+        script: flutter build apk --release
+    artifacts:
+      - build/app/outputs/flutter-apk/app-release.apk
